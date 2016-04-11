@@ -5,10 +5,9 @@ var port = process.env.PORT || 5000
 
 
 //Because Heroku doesn't like websockets?
-io.configure(function () {  
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
+//https://github.com/nodejs/node/wiki/Socket.IO-and-Heroku
+io.set('transports', ['xhr-polling']);
+io.set('polling duration', 10);
 
 
 app.get('/', function(req, res){
