@@ -5,10 +5,123 @@
     
   </head>
   <body>
+  	<script src="/socket.io/socket.io.js"></script>
+    <style>
+    #start{
+	    background-color: red; /* Green */
+	    width:100%;
 
-    <script src="/socket.io/socket.io.js"></script>
+	    /*border: none;*/
+	    color: white;
+	    /*padding: 15px 32px;*/
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	}
+	#reset{
+	    background-color: grey; /* Green */
+	    width:100%;
+
+	    /*border: none;*/
+	    color: black;
+	    /*padding: 15px 32px;*/
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	
+	}
+
+    </style>
 	<script>
 	  var socket = io();
+
+	  socket.on("connectionMessage", function(message){
+	  	console.log("Connection:" + message);
+	  });
+
+	  socket.on("updateInfo", function(message){
+	  	console.log("Received: " + message)
+	  });
+
+
+	  socket.on("updateAB0", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("AB0Info").innerHTML = "Abu Dhabi Begin 0 (First node): " + message;
+	  });
+	  socket.on("updateAE0", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("AE0Info").innerHTML = "Abu Dhabi End 0: " + message;
+	  });
+	  socket.on("updateSB0", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("SB0Info").innerHTML = "Shanghai Begin 0: " + message;
+	  });
+	  socket.on("updateSE0", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("SE0Info").innerHTML = "Shanghai Begin 0: " + message;
+	  });
+	  socket.on("updateAB1", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("AB1Info").innerHTML = "Abu Dhabi Begin 1: " + message;
+	  });
+	  socket.on("updateAE1", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("AE1Info").innerHTML = "Abu Dhabi End 1: " + message;
+	  });
+	  socket.on("updateSB1", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("SB1Info").innerHTML = "Shanghai Begin 1: " + message;
+	  });
+	  socket.on("updateSE1", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("SE1Info").innerHTML = "Shanghai End 1 (Final Node): " + message;
+	  });
+	  socket.on("updateAB2", function(message){
+	  	console.log("Received: " + message)
+	  	document.getElementById("SE1Info").innerHTML = "Abu Dhabi 2 (GIF): " + message;
+	  });
+
+	  
+
 	</script>
+
+	<div id="Console">
+
+
+		<form action="http://im-rubegoldberg.herokuapp.com/devices/reset">
+		    <input id="reset" type="submit" value="Reset" target="_blank">
+		</form>
+
+		<!-- <button type="button">Reset</button>  -->
+
+		<form action="http://im-rubegoldberg.herokuapp.com/devices/Begin">
+		    <input id="start" type="submit" value="Start" target="_blank">
+		</form>
+		<!-- <button type="button">Start!</button>  -->
+
+		<p>Below shows the state of each point in the system!</p> 
+		<ul>
+			<li id="AB0Info"></li>
+			<li id="AE0Info"></li>
+			<li id="SB0Info"></li>
+			<li id="SE0Info"></li>
+
+			<li id="AB1Info"></li>
+			<li id="AE1Info"></li>
+			<li id="SB1Info"></li>
+			<li id="SE1Info"></li>
+			<li id="AB2Info"></li>
+
+		</ul>
+
+
+
+
+	</div>
+
+
+
   </body>
 </html>
